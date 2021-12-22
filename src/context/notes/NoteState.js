@@ -31,7 +31,7 @@ const Notestate = (props) => {
       "__v": 0
     },
     {
-      "_id": "61beed451b5b3c1cf50eb90a",
+      "_id": "61beed451b5b3c13cf50eb90a",
       "user": "61bdffaf37ebc7f9332fdabb",
       "title": "Chemistry Notes new",
       "description": "The  Chemical reaction blow my",
@@ -40,7 +40,7 @@ const Notestate = (props) => {
       "__v": 0
     },
     {
-      "_id": "61beedd1c539acf71fec6a7c",
+      "_id": "61bee3dd1c539acf71fec6a7c",
       "user": "61bdffaf37ebc7f9332fdabb",
       "title": "Physics Notes",
       "description": "Light is source of energy",
