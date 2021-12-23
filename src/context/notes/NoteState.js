@@ -2,83 +2,88 @@ import NoteContext from "./noteContext";
 import { useState } from "react";
 
 const Notestate = (props) => {
-  let notesInitial = [
-    {
-      "_id": "61beed441b5b3c1cf50eb908",
-      "user": "61bdffaf37ebc7f9332fdabb",
-      "title": "Physics Notes",
-      "description": "Light is source of energy",
-      "tag": "Physics",
-      "date": "2021-12-19T08:28:52.350Z",
-      "__v": 0
-    },
-    {
-      "_id": "61beed451b5b3c1cf50eb90a",
-      "user": "61bdffaf37ebc7f9332fdabb",
-      "title": "Chemistry Notes new",
-      "description": "The  Chemical reaction blow my",
-      "tag": "Phy",
-      "date": "2021-12-19T08:28:53.469Z",
-      "__v": 0
-    },
-    {
-      "_id": "61beedd1c539acf71fec6a7c",
-      "user": "61bdffaf37ebc7f9332fdabb",
-      "title": "Physics Notes",
-      "description": "Light is source of energy",
-      "tag": "Physics",
-      "date": "2021-12-19T08:31:13.256Z",
-      "__v": 0
-    },
-    {
-      "_id": "61beed451b5b3c13cf50eb90a",
-      "user": "61bdffaf37ebc7f9332fdabb",
-      "title": "Chemistry Notes new",
-      "description": "The  Chemical reaction blow my",
-      "tag": "Phy",
-      "date": "2021-12-19T08:28:53.469Z",
-      "__v": 0
-    },
-    {
-      "_id": "61bee3dd1c539acf71fec6a7c",
-      "user": "61bdffaf37ebc7f9332fdabb",
-      "title": "Physics Notes",
-      "description": "Light is source of energy",
-      "tag": "Physics",
-      "date": "2021-12-19T08:31:13.256Z",
-      "__v": 0
-    },
-
-  ]
-
+  const host = "http://localhost:5000";
+  let notesInitial = []
   const [notes, setNotes] = useState(notesInitial)
 
-  // Add a note
-  const addNote= (title, description,tag)=>{
-    const note =  {
-      "_id": "61bee3ddw1c539acf71fec6a7c",
-      "user": "61bdffaf37ebc7wf9332fdabb",
-      "title": "Physics Notes added",
-      "description": "Light is source of  trat energy",
-      "tag": "Physics saaaaa",
-      "date": "2021-12-19T08:31:13.256Z",
-      "__v": 0
-    };
-    setNotes(notes.push(note))
-  }
-  // Delete a Note
-  const deleteNOte = ()=> {
+    // Get all Notes
+    // eslint-disable-next-line
+    const getNotes = async () => {
+      // API Call 
+      const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiZGZmYWYzN2ViYzdmOTMzMmZkYWJiIn0sImlhdCI6MTYzOTg0NTU5NH0.mpmdL7DsGBArWPNaiYB-sh-T6PH95JwCyPMhxaGrHUI"
+        }
+      });
+      const json = await response.json() 
+      setNotes(json)
+    }
+  
+    // Add a Note
+    const addNote = async (title, description, tag) => {
 
-  }
-  // Edit a Note
-  const editNote = ()=>{
+      // API Call 
+      const response = await fetch(`${host}/api/notes/addnote`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiZGZmYWYzN2ViYzdmOTMzMmZkYWJiIn0sImlhdCI6MTYzOTg0NTU5NH0.mpmdL7DsGBArWPNaiYB-sh-T6PH95JwCyPMhxaGrHUI"
+        },
+        body: JSON.stringify({title, description, tag})
+      });
+  
+      const note = await response.json();
+      setNotes(notes.concat(note))
+    }
+  
+    // Delete a Note
+    const deleteNote = async (id) => {
+      // API Call
+      const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiZGZmYWYzN2ViYzdmOTMzMmZkYWJiIn0sImlhdCI6MTYzOTg0NTU5NH0.mpmdL7DsGBArWPNaiYB-sh-T6PH95JwCyPMhxaGrHUI"
+        }
+      });
+      // eslint-disable-next-line
+      const json = response.json(); 
+      const newNotes = notes.filter((note) => { return note._id !== id })
+      setNotes(newNotes)
+    }
+  const editNote = async (id, title, description, tag) => {
+    // API Call 
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiZGZmYWYzN2ViYzdmOTMzMmZkYWJiIn0sImlhdCI6MTYzOTg0NTU5NH0.mpmdL7DsGBArWPNaiYB-sh-T6PH95JwCyPMhxaGrHUI"
+      },
+      body: JSON.stringify({title, description, tag})
+    });
+    // eslint-disable-next-line
+    const json = await response.json(); 
 
+     let newNotes = JSON.parse(JSON.stringify(notes))
+    // Logic to edit in client
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
+      if (element._id === id) {
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag; 
+        break; 
+      }
+    }  
+    setNotes(newNotes);
   }
 
 
 
   return (
-    <NoteContext.Provider value={{ notes, addNote , deleteNOte,editNote }}>
+    <NoteContext.Provider value={{ notes, addNote , deleteNote, editNote, getNotes }}>
       {props.children}
     </NoteContext.Provider>
   )

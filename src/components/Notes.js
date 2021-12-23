@@ -1,5 +1,5 @@
 
-import React,{useContext} from 'react'
+import React,{useContext,useEffect} from 'react'
 import noteContext from '../context/notes/noteContext';
 import AddNote from './AddNote';
 import Noteitem from './Noteitem';
@@ -7,12 +7,18 @@ import Noteitem from './Noteitem';
 
 function Notes() {
     const context = useContext(noteContext);
-    // eslint-disable-next-line
-    const { notes , addNote } = context;
 
+    const { notes ,getNotes } = context;
+    useEffect(() => {
+        getNotes()
+        // eslint-disable-next-line
+    }, [])
     return (
-        <div className="container">
+        <>
+        <div>
             <AddNote/>
+        </div>
+            <hr/>
         <div className='row my-3'>
             <h2>Your Note</h2>
             {notes.map((note)=>{
@@ -21,7 +27,7 @@ function Notes() {
 
             }
             </div>
-        </div>
+            </>
     )
 }
 export default Notes;
