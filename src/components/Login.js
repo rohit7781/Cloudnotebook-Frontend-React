@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 
 const Login = (props) => {
@@ -19,8 +19,9 @@ const Login = (props) => {
         console.log(json);
         if (json.success){
             // Save the auth token and redirect
+            console.log('Navigate')
             localStorage.setItem('token', json.authtoken); 
-            navigate.push("/");
+            navigate("/", { replace: true });
         }
         else{
             alert("Invalid credentials");
@@ -33,7 +34,7 @@ const Login = (props) => {
 
     return (
         <div className='container my-5'>
-            <form  onSubmit={handleSubmit}>
+            <form  onSubmit={handleSubmit} action='/' >
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label"><h4>Email address</h4> </label>
                     <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
