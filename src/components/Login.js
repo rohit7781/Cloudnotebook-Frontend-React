@@ -15,14 +15,13 @@ const Login = (props) => {
             },
             body: JSON.stringify({email: credentials.email, password: credentials.password})
         });
+        // eslint-disable-next-line
         const json = await response.json()
-        console.log(json);
         if (json.success){
             // Save the auth token and redirect
-            console.log('Navigate')
             localStorage.setItem('token', json.authtoken); 
-            navigate("/", { replace: true });
             props.showAlert('Loged In Success','success')
+            navigate("/", { replace: true });
 
         }
         else{
@@ -36,7 +35,7 @@ const Login = (props) => {
 
     return (
         <div className='container my-3'>
-            <h2 className='my-3'>Login Page</h2>
+            <h2 className='my-3'>Login to continue</h2>
             <form  onSubmit={handleSubmit} action='/' >
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label"><h4>Email address</h4> </label>
