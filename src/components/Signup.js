@@ -21,9 +21,12 @@ const Login = (props) => {
             // Save the auth token and redirect
             localStorage.setItem('token', json.authtoken); 
             navigate("/", { replace: true });
+            props.showAlert("SignUp Success. Start saving your Notes",'success')
+
         }
         else{
-            alert("Invalid credentials");
+            props.showAlert(json.error,'danger')
+
         }
     }
 
@@ -32,15 +35,16 @@ const Login = (props) => {
     }
 
     return (
-        <div className='container my-5'>
+        <div className='container my-3'>
+            <h2 className='my-3'> SignUp Page</h2>
             <form  onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label"><h4>Name</h4> </label>
-                    <input type="name" className="form-control" value={credentials.name} onChange={onChange} id="name" name="name" aria-describedby="namelHelp" />
+                    <input type="name" className="form-control" value={credentials.name} onChange={onChange} id="name" name="name" aria-describedby="namelHelp" required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label"><h4>Email address</h4> </label>
-                    <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
+                    <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" required />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
