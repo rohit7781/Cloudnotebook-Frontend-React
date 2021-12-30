@@ -13,6 +13,7 @@ import Signup from './components/Signup';
 import Alert from './components/Alert';
 import { useState } from 'react';
 import Footer from './components/Footer';
+import Errospage from './components/Errospage';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -40,6 +41,7 @@ function App() {
     <Route exact path="/login" element={<Login showAlert={showAlert}/>} />
     <Route exact path="/signup" element={<Signup showAlert={showAlert}/>} />
     </Routes>
+    <Errospage/>
     <Footer/>
     </div>
       </Router>
