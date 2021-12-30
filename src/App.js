@@ -40,8 +40,9 @@ function App() {
     <Route exact path="/mynotes" element={<About showAlert={showAlert} />} />
     <Route exact path="/login" element={<Login showAlert={showAlert}/>} />
     <Route exact path="/signup" element={<Signup showAlert={showAlert}/>} />
+    <Route path="*" element={<Errospage/>} />
     </Routes>
-    <Errospage/>
+  
     <Footer/>
     </div>
       </Router>
