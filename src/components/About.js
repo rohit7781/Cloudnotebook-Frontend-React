@@ -1,9 +1,14 @@
 import React from 'react'
+import Notes from './Notes';
 
-const About = () => { 
+
+const About = (props) => {
+    const { showAlert } = props;
+
     return (
-        <div>
-            This is About page
+        <div className='container my-3'>
+            <Notes showAlert={showAlert} />
+
         </div>
     )
 }

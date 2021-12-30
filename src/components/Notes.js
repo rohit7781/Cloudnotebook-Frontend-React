@@ -2,7 +2,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import noteContext from '../context/notes/noteContext';
-import AddNote from './AddNote';
 import Noteitem from './Noteitem';
 
 
@@ -45,7 +44,6 @@ function Notes(props) {
     return (
         <>
             <div>
-                <AddNote showAlert={props.showAlert} />
                 <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Launch demo modal
                 </button>
@@ -81,9 +79,9 @@ function Notes(props) {
                     </div>
                 </div>
             </div>
-            <hr />
+
             <div className='row my-3'>
-                <h2>My Note</h2>
+                <h2>My Notes</h2>
                 <div className="container mx-2"> 
                 {notes.length===0 && 'No notes to display'}
                 </div>
