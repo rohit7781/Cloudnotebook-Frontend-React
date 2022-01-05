@@ -1,8 +1,14 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
+
+
 function Footer() {
+
+    let location = useLocation();
+
     return (
-        <div style={{backgroundColor: '#797890'}} >
-            <footer className="text-center text-white" >
+        <div className={` ${location.pathname === "/login" || location.pathname === "/signup"  ? "fixed-bottom" : ""}`} style={{backgroundColor: '#797890'}} >
+            <footer className= {` text-center text-white `} >
 
                 <div className="container p-4 pb-0">
 
