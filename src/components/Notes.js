@@ -6,10 +6,11 @@ import Noteitem from './Noteitem';
 
 
 function Notes(props) {
+    props.setProgress(20);
     const context = useContext(noteContext);
-
     const { notes, getNotes ,editNote } = context;
     let navigate  = useNavigate();
+    props.setProgress(60);
     useEffect(() => {
         if (localStorage.getItem('token')) {   
             getNotes()
@@ -18,6 +19,8 @@ function Notes(props) {
         else{
             navigate("/login", { replace: true });
         }
+        props.setProgress(100);
+
     })
 
     const ref = useRef(null)

@@ -3,11 +3,11 @@ import Notes from './Notes';
 
 
 const About = (props) => {
-    const { showAlert } = props;
+    const { showAlert,setProgress } = props;
 
     return (
         <div className='container my-3'>
-            <Notes showAlert={showAlert} />
+            <Notes showAlert={showAlert} setProgress={setProgress}  />
 
         </div>
     )

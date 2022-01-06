@@ -7,6 +7,7 @@ const Login = (props) => {
     let navigate  = useNavigate();
 
     const handleSubmit = async (e) => {
+        props.setProgress(40);
         e.preventDefault();
         const response = await fetch("https://notebookoncloud.herokuapp.com/api/auth/login", {
             method: 'POST',
@@ -15,6 +16,7 @@ const Login = (props) => {
             },
             body: JSON.stringify({email: credentials.email, password: credentials.password})
         });
+        props.setProgress(60);
         // eslint-disable-next-line
         const json = await response.json()
         if (json.success){
@@ -22,11 +24,11 @@ const Login = (props) => {
             localStorage.setItem('token', json.authtoken); 
             props.showAlert('Loged In Success','success')
             navigate("/", { replace: true });
-
         }
         else{
             props.showAlert(json.error,'danger')
         }
+        props.setProgress(100);
     }
 
     const onChange = (e)=>{

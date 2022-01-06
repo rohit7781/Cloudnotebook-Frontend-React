@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 const Login = (props) => {
     const [credentials, setCredentials] = useState({name: "", email: "", password: ""}) 
     let navigate  = useNavigate();
-
+    props.setProgress(40);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch("https://notebookoncloud.herokuapp.com/api/auth/createuser", {
@@ -15,6 +15,8 @@ const Login = (props) => {
             },
             body: JSON.stringify({name: credentials.name ,email: credentials.email, password: credentials.password})
         });
+        props.setProgress(60);
+
         // eslint-disable-next-line
         const json = await response.json()
  
@@ -29,6 +31,8 @@ const Login = (props) => {
             props.showAlert(json.error,'danger')
 
         }
+        props.setProgress(100);
+
     }
 
     const onChange = (e)=>{
