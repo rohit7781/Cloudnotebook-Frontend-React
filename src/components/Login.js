@@ -7,8 +7,8 @@ const Login = (props) => {
     let navigate  = useNavigate();
 
     const handleSubmit = async (e) => {
-        props.setProgress(40);
         e.preventDefault();
+        props.setProgress(40);
         const response = await fetch("https://notebookoncloud.herokuapp.com/api/auth/login", {
             method: 'POST',
             headers: {

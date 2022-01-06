@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom"
 const Login = (props) => {
     const [credentials, setCredentials] = useState({name: "", email: "", password: ""}) 
     let navigate  = useNavigate();
-    props.setProgress(40);
     const handleSubmit = async (e) => {
         e.preventDefault();
+        props.setProgress(40);
+
         const response = await fetch("https://notebookoncloud.herokuapp.com/api/auth/createuser", {
             method: 'POST',
             headers: {
