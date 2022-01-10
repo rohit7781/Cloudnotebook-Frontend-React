@@ -6,20 +6,19 @@ import Noteitem from './Noteitem';
 
 
 function Notes(props) {
-    props.setProgress(20);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const context = useContext(noteContext);
-    const { notes, getNotes ,editNote } = context;
-    let navigate  = useNavigate();
-    props.setProgress(60);
+    const { notes, getNotes, editNote } = context;
+    let navigate = useNavigate();
     useEffect(() => {
-        if (localStorage.getItem('token')) {   
+        if (localStorage.getItem('token')) {
             getNotes()
             // eslint-disable-next-line
         }
-        else{
+        else {
             navigate("/login", { replace: true });
         }
-        props.setProgress(100);
 
     })
 
@@ -36,14 +35,19 @@ function Notes(props) {
     const handleClick = (e) => {
         editNote(note.id, note.etitle, note.edescription, note.etag)
         refClose.current.click();
-        props.showAlert("Updated Successfully",'success')
+        props.showAlert("Updated Successfully", 'success')
 
     }
+    const getSearchTerm = (event) => {
+        const data = event.target.value;
+        setSearchTerm(data);
+       
+    };
 
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
-
+    
     return (
         <>
             <div>
@@ -84,11 +88,22 @@ function Notes(props) {
             </div>
 
             <div className='row my-3'>
-                <h2>My Notes</h2>
-                <div className="container mx-2"> 
-                {notes.length===0 && 'No notes to display'}
+                <form className="d-flex">
+                    <input className="form-control me-2" type="text" placeholder="Search by Title" aria-label="Search" value={searchTerm} onChange={getSearchTerm} />
+
+                </form>
+                <h2 className='mt-5'>My Notes</h2>
+                <div className="container mx-2">
+                    {notes.length === 0 && 'No notes to Display'}
                 </div>
-                {notes.map((note) => {
+                {notes.filter((val)=>{
+                    if (searchTerm==="") {
+                        return val
+                    }
+                    else if (val.title.toLowerCase().includes(searchTerm.toLowerCase()) || val.tag.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        return val
+                    }
+                }).map((note) => {
                     return <Noteitem key={note._id} showAlert={props.showAlert} updateNote={updateNote} note={note} />;
                 })
 
