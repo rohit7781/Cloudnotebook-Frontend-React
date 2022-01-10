@@ -103,6 +103,7 @@ function Notes(props) {
                     else if (val.title.toLowerCase().includes(searchTerm.toLowerCase()) || val.tag.toLowerCase().includes(searchTerm.toLowerCase())) {
                         return val
                     }
+                    return false;
                 }).map((note) => {
                     return <Noteitem key={note._id} showAlert={props.showAlert} updateNote={updateNote} note={note} />;
                 })
