@@ -23,8 +23,7 @@ const Navbar = () => {
                             <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            {!localStorage.getItem('token') ? <div className="d-flex container"><h2>PLease Login/SignUp to see your Notes</h2>
-                            </div> : <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/mynotes">My Notes</Link>}
+                            {!localStorage.getItem('token') ? "" : <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/mynotes">My Notes</Link>}
                         </li>
 
                     </ul>
