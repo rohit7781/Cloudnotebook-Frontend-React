@@ -41,13 +41,13 @@ function Notes(props) {
     const getSearchTerm = (event) => {
         const data = event.target.value;
         setSearchTerm(data);
-       
+
     };
 
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
-    
+
     return (
         <>
             <div>
@@ -96,8 +96,8 @@ function Notes(props) {
                 <div className="container mx-2">
                     {notes.length === 0 && 'No notes to Display'}
                 </div>
-                {notes.filter((val)=>{
-                    if (searchTerm==="") {
+                {notes.filter((val) => {
+                    if (searchTerm === "") {
                         return val
                     }
                     else if (val.title.toLowerCase().includes(searchTerm.toLowerCase()) || val.tag.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -106,7 +106,7 @@ function Notes(props) {
                     return false;
                 }).map((note) => {
                     return <Noteitem key={note._id} showAlert={props.showAlert} updateNote={updateNote} note={note} />;
-                })
+                }).reverse()
 
                 }
             </div>
