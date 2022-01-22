@@ -89,7 +89,7 @@ function Notes(props) {
 
             <div className='row my-3'>
                 <form className="d-flex">
-                    <input className="form-control me-2" type="text" placeholder="Search by Title" aria-label="Search" value={searchTerm} onChange={getSearchTerm} />
+                    <input className="form-control me-2" type="text" placeholder="Search by Title or Tags" aria-label="Search" value={searchTerm} onChange={getSearchTerm} />
 
                 </form>
                 <h2 className='mt-5'>My Notes</h2>
