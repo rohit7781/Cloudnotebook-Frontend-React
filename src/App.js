@@ -15,6 +15,7 @@ import { useState } from 'react';
 import Footer from './components/Footer';
 import Errospage from './components/Errospage';
 import LoadingBar from 'react-top-loading-bar'
+import GetUser from './components/GetUser';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -47,6 +48,7 @@ function App() {
               <Route exact path="/mynotes" element={<About setProgress={setProgress} showAlert={showAlert} />} />
               <Route exact path="/login" element={<Login setProgress={setProgress} showAlert={showAlert} />} />
               <Route exact path="/signup" element={<Signup setProgress={setProgress} showAlert={showAlert} />} />
+              <Route exact path="/getuser" element={<GetUser setProgress={setProgress} showAlert={showAlert} />} />
               <Route path="*" element={<Errospage />} />
             </Routes>
 
