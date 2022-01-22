@@ -1,13 +1,13 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+
 
 
 function Footer() {
-    var x = window.matchMedia("(max-width: 700px)")
-    let location = useLocation();
+
+
 
     return (
-        <div className={` ${(location.pathname === "/signup" && x.matches) || (location.pathname === "/login" && x.matches) || (location.pathname === "/getuser" && x.matches) ? "" : "fixed-bottom"}`} style={{ backgroundColor: '#797890' }} >
+        <div style={{ backgroundColor: '#797890' }} >
             <footer className={` text-center text-white `} >
 
                 <div className="container p-4 pb-0">
