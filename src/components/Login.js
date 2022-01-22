@@ -1,44 +1,46 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
 const Login = (props) => {
-    const [credentials, setCredentials] = useState({email: "", password: ""}) 
-    let navigate  = useNavigate();
+    const host = process.env.REACT_APP__HOST;
+
+    const [credentials, setCredentials] = useState({ email: "", password: "" })
+    let navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         props.setProgress(40);
-        const response = await fetch("https://notebookoncloud.herokuapp.com/api/auth/login", {
+        const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({email: credentials.email, password: credentials.password})
+            body: JSON.stringify({ email: credentials.email, password: credentials.password })
         });
         props.setProgress(60);
         // eslint-disable-next-line
         const json = await response.json()
-        if (json.success){
+        if (json.success) {
             // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken); 
-            props.showAlert('Loged In Success','success')
+            localStorage.setItem('token', json.authtoken);
+            props.showAlert('Loged In Success', 'success')
             navigate("/", { replace: true });
         }
-        else{
-            props.showAlert(json.error,'danger')
+        else {
+            props.showAlert(json.error, 'danger')
         }
         props.setProgress(100);
     }
 
-    const onChange = (e)=>{
-        setCredentials({...credentials, [e.target.name]: e.target.value})
+    const onChange = (e) => {
+        setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
     return (
         <div className='container my-3'>
             <h2 className='my-3'>Login to continue</h2>
-            <form  onSubmit={handleSubmit} action='/' >
+            <form onSubmit={handleSubmit} action='/' >
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label"><h4>Email address</h4> </label>
                     <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" required />
