@@ -1,22 +1,22 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import noteContext from "../context/notes/noteContext"
-
+import { Link } from "react-router-dom";
 const AddNote = (props) => {
     const context = useContext(noteContext);
-    const {addNote} = context;
+    const { addNote } = context;
 
-    const [note, setNote] = useState({title: "", description: "", tag: ""})
+    const [note, setNote] = useState({ title: "", description: "", tag: "" })
 
-    const handleClick = (e)=>{
+    const handleClick = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
-        setNote({title: "", description: "", tag: ""})
-        props.showAlert("Addeed Successfully",'success')
+        setNote({ title: "", description: "", tag: "" })
+        props.showAlert("Addeed Successfully", 'success')
 
     }
 
-    const onChange = (e)=>{
-        setNote({...note, [e.target.name]: e.target.value})
+    const onChange = (e) => {
+        setNote({ ...note, [e.target.name]: e.target.value })
     }
     return (
         <div className="container my-3">
@@ -24,7 +24,7 @@ const AddNote = (props) => {
             <form className="my-3">
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label"><strong><h4>Title</h4></strong></label>
-                    <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp" value={note.title} onChange={onChange} minLength={3} required /> 
+                    <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp" value={note.title} onChange={onChange} minLength={3} required />
                     <div id="notesHelp" className="form-text">(Title is compulsary , Minimum 5 Character )</div>
                 </div>
                 <div className="mb-3">
@@ -36,9 +36,10 @@ const AddNote = (props) => {
                     <label htmlFor="tag" className="form-label"><strong><h4>Tag</h4></strong></label>
                     <input type="text" className="form-control" id="tag" name="tag" value={note.tag} onChange={onChange} minLength={5} required />
                 </div>
-               
+
                 <button type="submit" className="btn btn-primary btn-lg my-3" onClick={handleClick}>Add Note</button>
             </form>
+            <Link className="btn btn-primary btn-lg my-1" to="/mynotes" role="button">View my Notes</Link>
         </div>
     )
 }
