@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import GoogleIn from './GoogleIn';
 
 
 const Login = (props) => {
@@ -40,8 +41,9 @@ const Login = (props) => {
     return (
         <div className='container my-3'>
             <h2 className='my-3'>Login to continue</h2>
+            <GoogleIn setProgress={props.setProgress} showAlert={props.showAlert}/>
             <form onSubmit={handleSubmit} action='/' >
-                <div className="mb-3">
+                <div className="mb-3 mt-3">
                     <label htmlFor="email" className="form-label"><h4>Email address</h4> </label>
                     <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" required />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>

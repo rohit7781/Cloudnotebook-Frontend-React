@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import GoogleIn from './GoogleIn';
 
 
 const Login = (props) => {
@@ -46,9 +47,10 @@ const Login = (props) => {
     return (
         <div className='container my-3'>
             <h2 className='my-3'> SignUp Page</h2>
+            <GoogleIn setProgress={props.setProgress} showAlert={props.showAlert}/>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label"><h4>Name</h4> </label>
+                    <label htmlFor="name" className="form-label mt-3"><h4>Name</h4> </label>
                     <input type="name" className="form-control" value={credentials.name} onChange={onChange} id="name" name="name" aria-describedby="namelHelp" required />
                 </div>
                 <div className="mb-3">
